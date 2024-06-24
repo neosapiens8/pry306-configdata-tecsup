@@ -30,7 +30,7 @@ spring:
   data:
     mongodb:
       uri: mongodb+srv://neosapiens8:123456sql@cluster0.hkerxlh.mongodb.net/
-      database: mscustomerdb
+      database: mscustomerdb1
       repositories:
         enabled: true
   autoconfigure:
