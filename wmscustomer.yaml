@@ -1,37 +1,36 @@
 # Asignar puerto dinamico interno de comunicacion, para poder trabajar con el API
 server:
-  port: ${PORT:0}
+  port: ${PORT:0} # si la variable de entorno PORT no está definida, un valor de "0" le indica al servidor que elija un puerto aleatorio disponible
   error:
-    include-message: always
+    include-message: always # "siempre" se debe incluir el mensaje de error en la respuesta HTTP
 
 # EUREKA CUSTOMER
 eureka:
   instance:
-    # nombres internos dinámicos para conectarse con eureka
-    instance-id: ${spring.application.name}:${random.value}
+    instance-id: ${spring.application.name}:${random.value} # nombres internos dinámicos para conectarse con eureka
   client:
-    service-url:
-      # URL del servidor Eureka al que el cliente debe conectarse para registrarse y buscar otros servicios
-      defaultZone: http://localhost:8761/eureka
+    service-url: # especifica URLs de los servidores Eureka donde el cliente debe registrarse y desde donde debe recuperar la información del registro de servicios
+      defaultZone: http://localhost:8761/eureka # URL del servidor Eureka al que el cliente debe conectarse para registrarse y buscar otros servicios
 
-# DB MONGO
+# DB MONGO (LOCAL)
 #spring:
 #  data:
 #    mongodb:
 #      host: localhost
 #      port: 27017
-#      database: mscustomerdb
+#      database: mscustomerdb1
 #      repositories:
 #        enabled: true
 #  autoconfigure:
 #    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
+# DB MONGO ATLAS
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://neosapiens8:123456sql@cluster0.hkerxlh.mongodb.net/
-      database: mscustomerdb1
+      uri: mongodb+srv://neosapiens8:123456sql@cluster0.hkerxlh.mongodb.net/ # URI de conexión a tu instancia de MongoDB
+      database: mscustomerdb1 # nombre de la base de datos en MongoDB
       repositories:
-        enabled: true
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+        enabled: true # Habilita o deshabilita la creación de repositorios de MongoDB basados en Spring Data
+  autoconfigure: # configuración automática que se deben excluir del proceso de autoconfiguración de Spring Boot
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration # se encarga de configurar automáticamente una fuente de datos JDBC
